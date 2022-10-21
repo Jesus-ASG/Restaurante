@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ganancias</title>
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+        integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            var total = parseFloat(localStorage.getItem('total'));
+            if (total){
+                document.getElementById('ganancias').innerText = "$"+total.toFixed(2);
+            }
+            else
+                document.getElementById('ganancias').innerText = "$0.00";
+        });
+
+        class Plato {
+            constructor(id, nombre, precio, tipo, imagen) {
+                this.id = id;
+                this.nombre = nombre;
+                this.precio = precio;
+                this.imagen = imagen;
+                this.tipo = tipo;
+            }
+
+            toString() {
+                return "id: " + this.id + " nombre: "
+                    + this.nombre + " precio: "
+                    + this.precio + " imagen: " + this.imagen + " tipo: " + this.tipo;
+            }
+        }
+        function cargarMenu() {
+            var menu = [];
+
+            menu.push(new Plato(1, 'Bastones de Jamón', 100, 'aperitivo', 'bastonesdejamon.jpg'));
+            menu.push(new Plato(2, 'Mousse de gambas', 120, 'aperitivo', 'mousse.jpg'));
+            menu.push(new Plato(3, 'Lomo horneado', 210, 'carne', 'lomo.jpg'));
+            menu.push(new Plato(4, 'Espadilla', 179, 'carne', 'espaldilla.jpg'));
+            menu.push(new Plato(5, 'Filetitos de pescado con limón', 150, 'pescado', 'filete.webp'));
+            menu.push(new Plato(6, 'Pescado a la plancha', 129, 'pescado', 'plancha.jpg'));
+            menu.push(new Plato(7, 'Flan', 45, 'postre', 'flan.jpg'));
+            menu.push(new Plato(8, 'Brownie', 49, 'postre', 'brownie.jpg'));
+            menu.push(new Plato(9, 'Narajanda', 29, 'bebida', 'naranjada.jpg'));
+            menu.push(new Plato(10, 'Limonada', 29, 'bebida', 'limonada.jpg'));
+
+            window.localStorage.setItem('menu', JSON.stringify(menu));
+
+            var total = localStorage.getItem('total');
+            if (total){
+                localStorage.removeItem('total');
+            }
+            else
+                document.getElementById('ganancias').innerText = "$0.00";
+        }
+    </script>
+
+    <style>
+        body {
+            background-image: url("fondo.jpeg");
+        }
+
+        .titulo {
+            color: #fff;
+            text-align: center;
+            width: 100%;
+            margin-top: 20%;
+        }
+
+        .titulo h1 {
+            font-size: 150px;
+        }
+
+        .div-inicio {
+            height: 100vh;
+            width: 100%;
+            align-items: center;
+            text-align: center;
+        }
+
+        .div-inicio a {
+            display: block;
+            max-width: 200px;
+            margin: auto;
+            margin-top: 10%;
+        }
+
+        .btn-inicio {
+            display: block;
+            font-weight: bold;
+            border: 3px solid #fff;
+            padding: 10px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .btn-inicio:hover {
+            text-decoration: none;
+            font-weight: bold;
+            color: #000;
+            background-color: #fff;
+        }
+
+        .ganancias {
+            color: #fff;
+            text-align: center;
+            width: 100%;
+            margin-top: 50px;
+        }
+
+        .ganancias h3 {
+            color: #fff;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="titulo">
+                <h1>SABORE</h1>
+            </div>
+
+            <div class="ganancias">
+                <h3>Ganancias del día</h3>
+                <span id="ganancias"></span>
+            </div>
+
+            <div class="div-inicio">
+                <a onclick="cargarMenu()" href="parte1.html" class="btn-inicio">Ver la carta</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
